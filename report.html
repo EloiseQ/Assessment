@@ -167,6 +167,38 @@
             padding-top: 15px;
             border-top: 1px solid #ddd;
         }
+        .calculation-section {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        .deliverable-list {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .deliverable-list ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -316,33 +348,33 @@
                 </ul>
             </div>
             
-            <div class="scenario-box">
+        <div class="scenario-box">
                 <h4>Scenario A: Remove Worst 10% (Theoretical Upper Bound)</h4>
                 <ul>
                     <li>New Quality: <strong>0.0630 (6.30%)</strong></li>
                     <li>Volume Impact: <strong>-10.0%</strong></li>
                     <li>Result: ❌ Target not reached</li>
-                </ul>
-            </div>
-            
-            <div class="scenario-box">
+            </ul>
+        </div>
+        
+        <div class="scenario-box">
                 <h4>Scenario A: Remove Worst 15% (Theoretical Upper Bound)</h4>
                 <ul>
                     <li>New Quality: <strong>0.0667 (6.67%)</strong></li>
                     <li>Volume Impact: <strong>-15.0%</strong></li>
                     <li>Result: ❌ Target not reached</li>
-                </ul>
-            </div>
-            
-            <div class="scenario-box">
+            </ul>
+        </div>
+        
+        <div class="scenario-box">
                 <h4>Scenario A: Remove Worst 20% (Theoretical Upper Bound)</h4>
                 <ul>
                     <li>New Quality: <strong>0.0709 (7.09%)</strong></li>
                     <li>Volume Impact: <strong>-20.0%</strong></li>
                     <li>Result: ❌ Target not reached</li>
-                </ul>
-            </div>
-            
+            </ul>
+        </div>
+        
             <h3>Scenario Visualization</h3>
             <div class="image-container">
                 <img src="scenario_a_results.png" alt="Scenario A Results" style="width: 100%; max-width: 1000px; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -353,7 +385,7 @@
             
             <h3>Conclusion</h3>
             
-            <div class="warning-box">
+        <div class="warning-box">
                 <h3>❌ Cannot Reach 9.6% Target</h3>
                 <ul>
                     <li><strong>Maximum achievable under executable strategies: ~6.67%～7.1%</strong> (depending on strategy and volume drop), still below 9.6% target</li>
@@ -362,12 +394,12 @@
                             <li>Insufficient supply of high-quality segments</li>
                             <li>Limited scalability</li>
                             <li>Need for further optimization of delivery strategy</li>
-                        </ul>
-                    </li>
+                    </ul>
+                </li>
                     <li><strong>Next Steps:</strong> Need more high-quality traffic source data</li>
-                </ul>
-            </div>
-            
+            </ul>
+        </div>
+        
             <h3>Business Value Analysis</h3>
             <div class="metric-box" style="background: #e8f5e9; border-left: 4px solid #4caf50;">
                 <p><strong>Question:</strong> Even without reaching 9.6% target, is structural optimization still worthwhile (e.g., 5.67%→6.67%)?</p>
@@ -514,9 +546,141 @@
                             </ul>
                         </li>
                         <li><strong>Business Value:</strong> Even without the CPL increase ($30 → $33), structural optimization significantly improves cost efficiency and is worth implementing</li>
-                    </ul>
+            </ul>
                 </div>
             </div>
+        </section>
+        
+        <section>
+            <h2>Calculation Methods & Key Deliverables</h2>
+            
+            <div class="calculation-section">
+                <h3>Q1: Trend Analysis Methods</h3>
+                
+                <h4>1. Data Aggregation</h4>
+                <div class="code-block">
+                    <pre>daily_stats = df.groupby('date').agg({
+    'is_good': ['sum', 'count'],
+    'is_closed': 'sum',
+    'is_bad': 'sum'
+})
+GoodQualityRate = good_count / total_count
+CloseRate = closed_count / total_count
+BadRate = bad_count / total_count</pre>
+                </div>
+                
+                <h4>2. Rolling Mean & Confidence Intervals</h4>
+                <div class="code-block">
+                    <pre>GoodQualityRate_7d = GoodQualityRate.rolling(window=7, min_periods=1).mean()
+CI = p ± z × SE, where SE = √[p(1-p)/n]</pre>
+                </div>
+                
+                <h4>3. Statistical Significance Tests</h4>
+                <ul>
+                    <li><strong>Two-Proportion Z-Test:</strong> Compare first half vs second half rates</li>
+                    <li><strong>Logistic Regression:</strong> logit(P(is_good)) = β₀ + β₁ × day_index</li>
+                    <li><strong>Fisher Exact Test:</strong> For contingency table analysis</li>
+                </ul>
+                
+                <h4>Results:</h4>
+                <ul>
+                    <li>First Half Rate: 4.81%</li>
+                    <li>Second Half Rate: 6.53%</li>
+                    <li>Change: +1.72 pp (35.82% relative improvement)</li>
+                    <li>p-value (z-test): < 0.0001</li>
+                    <li>p-value (logistic): < 0.0001</li>
+                </ul>
+            </div>
+            
+            <div class="calculation-section">
+                <h3>Q2: Driver Analysis Methods</h3>
+                
+                <h4>1. Univariate Segmentation</h4>
+                <div class="code-block">
+                    <pre>For each segment:
+    good_rate = good_count / n
+    lift = good_rate / baseline_rate
+    CI = good_rate ± z × SE
+    z-test vs baseline for significance</pre>
+                </div>
+                
+                <h4>2. Multivariate Models</h4>
+                <ul>
+                    <li><strong>Logistic Regression:</strong> Linear model with interpretable coefficients</li>
+                    <li><strong>Random Forest:</strong> Non-linear tree model for feature importance</li>
+                    <li><strong>Features:</strong> One-hot encoded categorical variables (dc_pages, publisher_zone, scores, etc.)</li>
+                </ul>
+                
+                <h4>3. Model Evaluation</h4>
+                <ul>
+                    <li>AUC (Area Under ROC Curve)</li>
+                    <li>PR-AUC (Precision-Recall AUC)</li>
+                    <li>Feature importance ranking</li>
+                </ul>
+                
+                <h4>Key Findings:</h4>
+                <ul>
+                    <li>Top High-Quality: PhoneScore=5 (8.30%, 1.46x lift)</li>
+                    <li>Top Low-Quality: PublisherZone "Top Right-300x250" (2.99%, 0.53x lift)</li>
+                    <li>Data quality scores are strongest predictors</li>
+                </ul>
+            </div>
+            
+            <div class="calculation-section">
+                <h3>Q3: Uplift Scenario Methods</h3>
+                
+                <h4>1. Scenario A: Cut the Tail</h4>
+                <div class="code-block">
+                    <pre>Sort leads by is_good (theoretical upper bound)
+Remove worst X% of traffic
+Recalculate: new_rate = remaining_good / remaining_total</pre>
+                </div>
+                <p><strong>Note:</strong> This is a theoretical benchmark. In practice, use model prediction scores or historical segment quality.</p>
+                
+                <h4>2. Scenario B: Structural Reallocation</h4>
+                <div class="code-block">
+                    <pre>Identify high/low quality segments
+Shift volume from low to high segments
+Constraint: High-quality segments max +30%
+Calculate weighted average rate</pre>
+                </div>
+                
+                <h4>3. Scenario C: Rule-Based Filtering</h4>
+                <div class="code-block">
+                    <pre>Apply filters: PhoneScore >= 4, AddressScore >= 4
+Calculate new_rate and volume_drop
+Evaluate if target reached</pre>
+                </div>
+                
+                <h4>4. Business Value Calculation</h4>
+                <div class="code-block">
+                    <pre>Effective Leads = Total Leads × GoodQualityRate
+Total Cost = Total Leads × CPL
+Effective CPL = Total Cost / Effective Leads
+Cost Savings = Baseline Cost - Optimized Cost</pre>
+                </div>
+                
+                <h4>Results Summary:</h4>
+                <ul>
+                    <li>Scenario A (15% cut): 6.67% quality, -15% volume</li>
+                    <li>Maximum Achievable: ~6.67%～7.1%</li>
+                    <li>Business Value: 15% cost efficiency improvement, $12,540 savings</li>
+                </ul>
+            </div>
+            
+            <div class="deliverable-list">
+                <h3>Key Deliverables</h3>
+                <ul>
+                    <li><strong>Data Processing:</strong> Cleaned dataset with feature engineering (df_cleaned.pkl)</li>
+                    <li><strong>Trend Analysis:</strong> Daily/weekly trends with 7-day rolling means and 95% CI (trend_daily.png)</li>
+                    <li><strong>Segmentation Tables:</strong> Univariate analysis across 11+ dimensions with lift and significance</li>
+                    <li><strong>Multivariate Models:</strong> Logistic Regression and Random Forest with feature importance</li>
+                    <li><strong>Scenario Simulations:</strong> Three scenarios (A/B/C) with volume and quality trade-offs</li>
+                    <li><strong>Business Value Analysis:</strong> Cost efficiency calculations and ROI assessment</li>
+                    <li><strong>Visualizations:</strong> Trend charts, segment comparisons, scenario results</li>
+                    <li><strong>Statistical Tests:</strong> Z-tests, Fisher exact tests, logistic regression p-values</li>
+                </ul>
+        </div>
         </section>
     </div>
 </body>

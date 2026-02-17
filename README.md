@@ -1,124 +1,125 @@
 # Lead Quality Analysis Project
 
-## 项目结构
+## Project Structure
 
 ```
 .
-├── 01_load_and_clean.ipynb          # 数据读取、清洗、特征工程
-├── 02_trend_analysis.ipynb          # 问题1：趋势分析
-├── 03_driver_analysis.ipynb          # 问题2：驱动因素分析
-├── 04_uplift_scenarios.ipynb        # 问题3：9.6%目标情景模拟
-├── report.md                         # Executive Summary报告
-├── requirements.txt                  # Python依赖
-└── README.md                         # 本文件
+├── 01_load_and_clean.ipynb          # Data loading, cleaning, feature engineering
+├── 02_trend_analysis.ipynb          # Question 1: Trend analysis
+├── 03_driver_analysis.ipynb        # Question 2: Driver analysis
+├── 04_uplift_scenarios.ipynb       # Question 3: 9.6% target scenario simulation
+├── report.md                        # Executive Summary report
+├── report.html                      # HTML Executive Summary report
+├── requirements.txt                 # Python dependencies
+└── README.md                        # This file
 ```
 
-## 使用说明
+## Usage Instructions
 
-### 1. 安装依赖
+### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. 执行顺序
+### 2. Execution Order
 
-**必须按顺序执行notebooks：**
+**Notebooks must be executed in order:**
 
 1. **01_load_and_clean.ipynb**
-   - 读取Excel数据
-   - 数据质量检查
-   - CallStatus映射
-   - 特征工程
-   - 保存清洗后的数据到 `df_cleaned.pkl`
+   - Load Excel data
+   - Data quality checks
+   - CallStatus mapping
+   - Feature engineering
+   - Save cleaned data to `df_cleaned.pkl`
 
 2. **02_trend_analysis.ipynb**
-   - 加载 `df_cleaned.pkl`
-   - 按天/周聚合分析
-   - 趋势图绘制
-   - 显著性检验（z-test, logistic regression）
+   - Load `df_cleaned.pkl`
+   - Daily/weekly aggregation analysis
+   - Trend visualization
+   - Statistical significance tests (z-test, logistic regression)
 
 3. **03_driver_analysis.ipynb**
-   - 加载 `df_cleaned.pkl`
-   - 单变量分群分析
-   - 多变量模型（Logistic Regression + Random Forest）
-   - 驱动因素总结
+   - Load `df_cleaned.pkl`
+   - Univariate segmentation analysis
+   - Multivariate models (Logistic Regression + Random Forest)
+   - Driver summary
 
 4. **04_uplift_scenarios.ipynb**
-   - 加载 `df_cleaned.pkl`
-   - 3套情景模拟
-   - 9.6%目标可达性分析
+   - Load `df_cleaned.pkl`
+   - Three scenario simulations
+   - 9.6% target feasibility analysis
 
-5. **生成报告**
-   - 运行完所有notebooks后，执行：`python3 generate_report.py`
-   - 会自动生成 `report.md` 和 `report.html` 两种格式
-   - HTML报告更美观，可在浏览器中打开查看
+5. **Generate Report**
+   - After running all notebooks, execute: `python3 generate_report.py`
+   - Automatically generates both `report.md` and `report.html` formats
+   - HTML report is more visually appealing and can be opened in a browser
 
-## 关键指标定义
+## Key Metrics Definition
 
-### Lead Quality主指标
+### Lead Quality Primary Metrics
 
 1. **GoodQualityRate** (Primary)
-   - 定义: (Closed + EP Sent + EP Received + EP Confirmed) / All
-   - 这是主要的质量指标
+   - Definition: (Closed + EP Sent + EP Received + EP Confirmed) / All
+   - This is the primary quality metric
 
 2. **CloseRate**
-   - 定义: Closed / All
+   - Definition: Closed / All
 
 3. **BadRate**
-   - 定义: (Unable to Contact + Invalid Profile + Doesn't Qualify) / All
+   - Definition: (Unable to Contact + Invalid Profile + Doesn't Qualify) / All
 
-### CallStatus分组
+### CallStatus Groups
 
-- **Closed（成交）**
-- **Good quality：** EP Sent / EP Received / EP Confirmed
-- **Bad quality：** Unable to Contact / Invalid Profile / Doesn't Qualify
-- **Unknown：** 既不算好也不算坏
+- **Closed** (converted)
+- **Good quality:** EP Sent / EP Received / EP Confirmed
+- **Bad quality:** Unable to Contact / Invalid Profile / Doesn't Qualify
+- **Unknown:** Neither good nor bad
 
-## 注意事项
+## Notes
 
-1. **数据文件路径：** 确保 `Analyst_case_study_dataset_1_(1) (1).xls` 在当前目录
-2. **列名映射：** 代码会自动查找列名，但如果列名不匹配，需要手动调整
-3. **缺失值处理：** AddressScore和PhoneScore的missing值会被单独分析
-4. **WidgetName解析：** 300250和302252会被合并为同一类
+1. **Data File Path:** Ensure `Analyst_case_study_dataset_1_(1) (1).xls` is in the current directory
+2. **Column Name Mapping:** Code automatically finds column names, but manual adjustment may be needed if names don't match
+3. **Missing Value Handling:** Missing values for AddressScore and PhoneScore are analyzed separately
+4. **WidgetName Parsing:** 300250 and 302252 are merged into the same category
 
-## 输出文件
+## Output Files
 
-- `df_cleaned.pkl` - 清洗后的数据（供后续notebooks使用）
-- `trend_daily.png` - 趋势图（如果生成）
-- `report.md` - Markdown格式的Executive Summary
-- `report.html` - **HTML格式的Executive Summary**（美观，可在浏览器中打开）✨
+- `df_cleaned.pkl` - Cleaned data (for use by subsequent notebooks)
+- `trend_daily.png` - Trend chart (if generated)
+- `segments_comparison.png` - Segment comparison chart (if generated)
+- `scenario_a_results.png` - Scenario A results chart (if generated)
+- `report.md` - Executive Summary in Markdown format
+- `report.html` - **Executive Summary in HTML format** (visually appealing, can be opened in browser)
 
-## 生成报告
+## Generate Report
 
-运行完所有notebooks后：
+After running all notebooks:
 
 ```bash
 python3 generate_report.py
 ```
 
-这会自动生成：
-- ✅ `report.md` - Markdown格式报告
-- ✅ `report.html` - **HTML格式报告**（美观，可在浏览器中打开）
+This automatically generates:
+- ✅ `report.md` - Report in Markdown format
+- ✅ `report.html` - **Report in HTML format** (visually appealing, can be opened in browser)
 
-**打开HTML报告：**
+**Open HTML Report:**
 ```bash
 open report.html  # Mac
-# 或直接双击 report.html 文件
+# Or simply double-click the report.html file
 ```
 
-HTML报告特点：
-- 📱 响应式设计（适配手机/平板/电脑）
-- 🎨 现代化UI，彩色指标卡片
-- 📊 清晰的表格和情景展示
-- ✅ 适合分享和演示
+HTML Report Features:
+- 📱 Responsive design (mobile/tablet/desktop compatible)
+- 🎨 Modern UI with colored metric cards
+- 📊 Clear tables and scenario displays
+- ✅ Suitable for sharing and presentation
 
-详细说明请参考：`如何生成HTML报告.md`
+## Troubleshooting
 
-## 问题反馈
-
-如果遇到问题，请检查：
-1. 数据文件是否存在且可读
-2. 所有依赖是否已安装（包括xlrd）
-3. Notebooks是否按顺序执行
-4. 列名是否匹配实际数据
+If you encounter issues, please check:
+1. Data file exists and is readable
+2. All dependencies are installed (including xlrd)
+3. Notebooks are executed in order
+4. Column names match actual data
