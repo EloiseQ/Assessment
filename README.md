@@ -9,7 +9,7 @@
 ├── 03_driver_analysis.ipynb        # Question 2: Driver analysis
 ├── 04_uplift_scenarios.ipynb       # Question 3: 9.6% target scenario simulation
 ├── report.md                        # Executive Summary report
-├── report.html                      # HTML Executive Summary report
+├── index.html                       # HTML Executive Summary report
 ├── requirements.txt                 # Python dependencies
 └── README.md                        # This file
 ```
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 5. **Generate Report**
    - After running all notebooks, execute: `python3 generate_report.py`
-   - Automatically generates both `report.md` and `report.html` formats
+   - Automatically generates both `report.md` and `index.html` formats
    - HTML report is more visually appealing and can be opened in a browser
 
 ## Key Metrics Definition
@@ -90,7 +90,7 @@ pip install -r requirements.txt
 - `segments_comparison.png` - Segment comparison chart (if generated)
 - `scenario_a_results.png` - Scenario A results chart (if generated)
 - `report.md` - Executive Summary in Markdown format
-- `report.html` - **Executive Summary in HTML format** (visually appealing, can be opened in browser)
+- `index.html` - **Executive Summary in HTML format** (visually appealing, can be opened in browser)
 
 ## Generate Report
 
@@ -102,12 +102,12 @@ python3 generate_report.py
 
 This automatically generates:
 - ✅ `report.md` - Report in Markdown format
-- ✅ `report.html` - **Report in HTML format** (visually appealing, can be opened in browser)
+- ✅ `index.html` - **Report in HTML format** (visually appealing, can be opened in browser)
 
 **Open HTML Report:**
 ```bash
-open report.html  # Mac
-# Or simply double-click the report.html file
+open index.html  # Mac
+# Or simply double-click the index.html file
 ```
 
 HTML Report Features:

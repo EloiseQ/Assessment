@@ -706,17 +706,17 @@ def generate_report():
     
     # 生成HTML报告
     html_content = generate_html_report(baseline, trend, high_segments, low_segments, scenarios, best_scenario)
-    with open('report.html', 'w', encoding='utf-8') as f:
+    with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
     
     print(f"\n✓ 报告已生成:")
     print(f"  - report.md (Markdown格式)")
-    print(f"  - report.html (HTML格式，可在浏览器中打开)")
+    print(f"  - index.html (HTML格式，可在浏览器中打开)")
     print(f"\n关键结果:")
     print(f"  - Baseline: {baseline['GoodQualityRate']*100:.2f}%")
     print(f"  - 趋势: {trend['change_direction']} ({'显著' if trend['significant'] else '不显著'})")
     print(f"  - 能否达到9.6%: {'能' if best_scenario else '不能'}")
-    print(f"\n打开HTML报告: open report.html")
+    print(f"\n打开HTML报告: open index.html")
 
 if __name__ == '__main__':
     generate_report()
