@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Quality Analysis - Executive Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .metric-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-card h3 {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .metric-card .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .data-table thead {
+            background: #3498db;
+            color: white;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+        .scenario-box {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .scenario-box h4 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .image-container img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        .results-table th, .results-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .results-table th {
+            background: #3498db;
+            color: white;
+        }
+        .results-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .question-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .answer-box {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lead Quality Analysis - Executive Summary</h1>
+        
+        <section>
+            <h2>Baseline & Methodology</h2>
+            <div class="metric-box">
+                <p><strong>Lead Quality Metrics:</strong></p>
+                <ul>
+                    <li><strong>GoodQualityRate</strong> (Primary): (Closed + EP Sent + EP Received + EP Confirmed) / All Leads</li>
+                    <li><strong>CloseRate</strong>: Closed / All Leads</li>
+                    <li><strong>BadRate</strong>: (Unable to Contact + Invalid Profile + Doesn't Qualify) / All Leads</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Dataset Size:</strong> 2,786 leads</p>
+            </div>
+            
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <h3>GoodQualityRate</h3>
+                    <div class="value">5.67%</div>
+                </div>
+                <div class="metric-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <h3>CloseRate</h3>
+                    <div class="value">3.52%</div>
+                </div>
+                <div class="metric-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h3>BadRate</h3>
+                    <div class="value">17.52%</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Q1: Lead Quality Trend</h2>
+            <div class="metric-box">
+                <p><strong>Conclusion:</strong> Lead quality is <strong>improving</strong></p>
+                <ul>
+                    <li><strong>Trend Direction:</strong> Improving</li>
+                    <li><strong>Statistical Significance:</strong> p < 0.0001, <span class="badge badge-success">Significant</span> (α=0.05)</li>
+                    <li><strong>First Half vs Second Half:</strong>
+                        <ul>
+                            <li>First Half GoodQualityRate: 4.81%</li>
+                            <li>Second Half GoodQualityRate: 6.53%</li>
+                            <li>Change: +1.72 percentage points (35.82% relative improvement)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>Trend Visualization</h3>
+            <div class="image-container">
+                <img src="trend_daily.png" alt="Daily Trend Analysis" style="width: 100%; max-width: 1200px; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; margin-top: 10px; font-size: 0.9em;">
+                    <strong>Figure 1:</strong> Lead quality trends showing GoodQualityRate, CloseRate, and BadRate with daily rates, 7-day rolling means, and 95% confidence intervals
+                </p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Q2: Driver Analysis</h2>
+            
+            <h3>Top 3 High-Quality Segments (Recommend to Scale)</h3>
+            <table class='data-table'>
+                <thead>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Dimension</th>
+                        <th>GoodQualityRate</th>
+                        <th>Lift</th>
+                        <th>Sample Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>5</td><td>phone_score_bin</td><td>0.0830 (8.30%)</td><td>1.46x</td><td>566</td></tr>
+                    <tr><td>5</td><td>address_score_bin</td><td>0.0706 (7.06%)</td><td>1.25x</td><td>807</td></tr>
+                    <tr><td>True</td><td>is_branded</td><td>0.0600 (6.00%)</td><td>1.06x</td><td>1116</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Top 3 Low-Quality Segments (Recommend to Reduce)</h3>
+            <table class='data-table'>
+                <thead>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Dimension</th>
+                        <th>GoodQualityRate</th>
+                        <th>Lift</th>
+                        <th>Sample Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Top Right-300x250</td><td>publisher_zone</td><td>0.0299 (2.99%)</td><td>0.53x</td><td>234</td></tr>
+                    <tr><td>missing</td><td>phone_score_bin</td><td>0.0491 (4.91%)</td><td>0.87x</td><td>1487</td></tr>
+                    <tr><td>missing</td><td>address_score_bin</td><td>0.0502 (5.02%)</td><td>0.88x</td><td>1694</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="metric-box" style="background: #fff3cd; border-left: 4px solid #ffc107; margin-top: 15px;">
+                <p><strong>Note on Missing Scores:</strong> Missing scores likely reflect field coverage period differences or data pipeline issues, not necessarily poor user quality. Recommendation: Improve Phone/Address score coverage rather than directly cutting missing segments.</p>
+            </div>
+            
+            <h3>Segment Comparison Visualization</h3>
+            <div class="image-container">
+                <img src="segments_comparison.png" alt="Segments Comparison" style="width: 100%; max-width: 1200px; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; margin-top: 10px; font-size: 0.9em;">
+                    <strong>Figure 2:</strong> Top 5 high-quality segments vs Top 5 low-quality segments comparison showing GoodQualityRate and Lift multiples
+                </p>
+            </div>
+            
+            <div class="metric-box">
+                <p><strong>Key Drivers:</strong></p>
+                <ul>
+                    <li><strong>Data Quality Scores:</strong> PhoneScore and AddressScore are the strongest predictors</li>
+                    <li><strong>Ad Placement:</strong> Certain PublisherZones perform significantly worse</li>
+                    <li><strong>Campaign Type:</strong> Branded campaigns outperform generic campaigns</li>
+                </ul>
+                <p><strong>Model Application:</strong> Use model outputs as lead scoring for: pre-delivery filtering, bid differentiation, and channel quota allocation.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Q3: Can We Reach 9.6% Target?</h2>
+            <div class="metric-box">
+                <p><strong>Current Baseline GoodQualityRate:</strong> 0.0567 (5.67%)</p>
+                <p><strong>Target GoodQualityRate:</strong> 9.6%</p>
+                <p><strong>Required Improvement:</strong> 3.93 percentage points (69.28% relative increase)</p>
+                <p style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                    <strong>Note:</strong> The question mentions 8.0% as the baseline, which is the advertiser's historical baseline/target metric. The actual baseline observed in this dataset is 5.67%, meaning achieving 9.6% requires a larger improvement in this sample.
+                </p>
+            </div>
+            
+            <h3>Scenario Analysis</h3>
+            
+            <div class="metric-box" style="background: #e8f4f8; border-left: 4px solid #3498db; margin-bottom: 20px;">
+                <p><strong>Scenario A Execution Method:</strong> Scenario A is a <strong>theoretical upper bound/benchmark</strong>, simulated by sorting leads by <strong>true is_good values</strong> and removing the worst X% of traffic. This is not executable in actual delivery (as we cannot know the true quality of each lead in advance), but serves as a theoretical upper bound to measure improvement potential.</p>
+                <p style="margin-top: 8px;"><strong>Executable Alternatives:</strong> In actual delivery, use <strong>model prediction scores (lead scoring)</strong> or <strong>historical segment average quality</strong> to sort and filter, rather than true is_good values. Scenario C (rule-based filtering) and Scenario B (structural reallocation) are executable alternatives.</p>
+            </div>
+            
+            <div class="scenario-box">
+                <h4>Scenario A: Remove Worst 5% (Theoretical Upper Bound)</h4>
+                <ul>
+                    <li>New Quality: <strong>0.0597 (5.97%)</strong></li>
+                    <li>Volume Impact: <strong>-5.0%</strong></li>
+                    <li>Result: ❌ Target not reached</li>
+                </ul>
+            </div>
+            
+            <div class="scenario-box">
+                <h4>Scenario A: Remove Worst 10% (Theoretical Upper Bound)</h4>
+                <ul>
+                    <li>New Quality: <strong>0.0630 (6.30%)</strong></li>
+                    <li>Volume Impact: <strong>-10.0%</strong></li>
+                    <li>Result: ❌ Target not reached</li>
+                </ul>
+            </div>
+            
+            <div class="scenario-box">
+                <h4>Scenario A: Remove Worst 15% (Theoretical Upper Bound)</h4>
+                <ul>
+                    <li>New Quality: <strong>0.0667 (6.67%)</strong></li>
+                    <li>Volume Impact: <strong>-15.0%</strong></li>
+                    <li>Result: ❌ Target not reached</li>
+                </ul>
+            </div>
+            
+            <div class="scenario-box">
+                <h4>Scenario A: Remove Worst 20% (Theoretical Upper Bound)</h4>
+                <ul>
+                    <li>New Quality: <strong>0.0709 (7.09%)</strong></li>
+                    <li>Volume Impact: <strong>-20.0%</strong></li>
+                    <li>Result: ❌ Target not reached</li>
+                </ul>
+            </div>
+            
+            <h3>Scenario Visualization</h3>
+            <div class="image-container">
+                <img src="scenario_a_results.png" alt="Scenario A Results" style="width: 100%; max-width: 1000px; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; margin-top: 10px; font-size: 0.9em;">
+                    <strong>Figure 3:</strong> Scenario A results showing new quality rates at different volume cut percentages, with red dashed line indicating 9.6% target
+                </p>
+            </div>
+            
+            <h3>Conclusion</h3>
+            
+            <div class="warning-box">
+                <h3>❌ Cannot Reach 9.6% Target</h3>
+                <ul>
+                    <li><strong>Maximum achievable under executable strategies: ~6.67%～7.1%</strong> (depending on strategy and volume drop), still below 9.6% target</li>
+                    <li><strong>Bottlenecks:</strong>
+                        <ul>
+                            <li>Insufficient supply of high-quality segments</li>
+                            <li>Limited scalability</li>
+                            <li>Need for further optimization of delivery strategy</li>
+                        </ul>
+                    </li>
+                    <li><strong>Next Steps:</strong> Need more high-quality traffic source data</li>
+                </ul>
+            </div>
+            
+            <h3>Business Value Analysis</h3>
+            <div class="metric-box" style="background: #e8f5e9; border-left: 4px solid #4caf50;">
+                <p><strong>Question:</strong> Even without reaching 9.6% target, is structural optimization still worthwhile (e.g., 5.67%→6.67%)?</p>
+                
+                <h4>Calculation (Example: Scenario A Cut 15%):</h4>
+                <table class="results-table" style="margin: 15px 0;">
+                    <tr>
+                        <th>Metric</th>
+                        <th>Baseline</th>
+                        <th>Optimized (Cut 15%)</th>
+                        <th>Change</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Leads</strong></td>
+                        <td>2,786</td>
+                        <td>2,368 (-15%)</td>
+                        <td>-418 leads</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GoodQualityRate</strong></td>
+                        <td>5.67%</td>
+                        <td>6.67%</td>
+                        <td>+1.00 pp</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Effective Leads (Good Quality)</strong></td>
+                        <td>158</td>
+                        <td>158</td>
+                        <td>0 (unchanged)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CPL (Assumed)</strong></td>
+                        <td>$30</td>
+                        <td>$30</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Cost</strong></td>
+                        <td>$83,580</td>
+                        <td>$71,040</td>
+                        <td>-$12,540</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Effective Lead Cost (CPL Effective)</strong></td>
+                        <td>$529</td>
+                        <td>$450</td>
+                        <td>-$79 (15% improvement)</td>
+                    </tr>
+                </table>
+                
+                <h4>Conclusion:</h4>
+                <ul>
+                    <li><strong>Effective Lead Count Unchanged:</strong> Although total volume decreases by 15%, quality improvement keeps effective lead count constant (158 leads)</li>
+                    <li><strong>Cost Efficiency Improved:</strong> Effective lead CPL decreases from $529 to $450, <strong>15% improvement</strong>, total cost savings of $12,540</li>
+                    <li><strong>Business Value:</strong> Even without reaching 9.6% target (cannot get $30→$33 CPL increase), structural optimization still <strong>significantly improves cost efficiency</strong> and is worth implementing</li>
+                    <li><strong>Risk Note:</strong> In actual execution, if using model prediction scores or historical segment quality sorting (rather than true is_good), results may be slightly lower than theoretical upper bound, but still deliver positive ROI</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Key Questions & Answers</h2>
+            
+            <div class="question-box">
+                <h3>Question 1: Are we seeing any lead quality trends over time (improving, declining)? Are they statistically significant?</h3>
+                <div class="answer-box">
+                    <p><strong>Answer:</strong></p>
+                    <p>Yes, we are seeing a <strong>statistically significant improvement</strong> in lead quality over time.</p>
+                    <ul>
+                        <li><strong>Trend Direction:</strong> Improving</li>
+                        <li><strong>Statistical Significance:</strong> p < 0.0001, <strong>Highly Significant</strong> (α=0.05)</li>
+                        <li><strong>Comparison:</strong>
+                            <ul>
+                                <li>First Half GoodQualityRate: 4.81%</li>
+                                <li>Second Half GoodQualityRate: 6.53%</li>
+                                <li>Change Magnitude: +1.72 percentage points (35.82% relative improvement)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Conclusion:</strong> Lead quality has improved significantly over the analyzed time period, with a 35.82% relative increase from the first half to the second half.</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h3>Question 2: What can we learn about the drivers of "lead quality" from this dataset? What segments - where the ad was shown, what kind of person filled out the ad, what kind of ad did they see - have differing lead quality rates?</h3>
+                <div class="answer-box">
+                    <p><strong>Answer:</strong></p>
+                    <p>We identified several key drivers of lead quality through segmentation analysis:</p>
+                    
+                    <h4>Top 3 High-Quality Segments (Recommend to Scale):</h4>
+                    <ul>
+                        <li><strong>PhoneScore = 5:</strong> 8.30% GoodQualityRate (1.46x lift, n=566)</li>
+                        <li><strong>AddressScore = 5:</strong> 7.06% GoodQualityRate (1.25x lift, n=807)</li>
+                        <li><strong>Branded Campaigns:</strong> 6.00% GoodQualityRate (1.06x lift, n=1,116)</li>
+                    </ul>
+                    
+                    <h4>Top 3 Low-Quality Segments (Recommend to Reduce/Cut):</h4>
+                    <ul>
+                        <li><strong>PublisherZone "Top Right-300x250":</strong> 2.99% GoodQualityRate (0.53x lift, n=234)</li>
+                        <li><strong>Missing PhoneScore:</strong> 4.91% GoodQualityRate (0.87x lift, n=1,487)</li>
+                        <li><strong>Missing AddressScore:</strong> 5.02% GoodQualityRate (0.88x lift, n=1,694)</li>
+                    </ul>
+                    
+                    <p><strong>Key Insights:</strong></p>
+                    <ul>
+                        <li><strong>Data Quality Scores Matter:</strong> Leads with PhoneScore=5 and AddressScore=5 show significantly higher quality rates</li>
+                        <li><strong>Ad Placement Matters:</strong> Certain publisher zones perform poorly</li>
+                        <li><strong>Campaign Type:</strong> Branded campaigns outperform generic campaigns</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h3>Question 3: If the advertiser says they will increase our CPL by 20% (i.e., $30 to $33) if we increase our lead quality by 20% (i.e., from 8.0% to 9.6%), do we see any opportunities to do that here? What kinds of things could we do?</h3>
+                <div class="answer-box">
+                    <p><strong>Answer:</strong></p>
+                    <p><strong>Current Baseline:</strong> 5.67% GoodQualityRate</p>
+                    <p><strong>Baseline Clarification:</strong> The question mentions 8.0% as the baseline, which is the advertiser's historical baseline/target metric. The actual baseline observed in this dataset is 5.67%, meaning achieving 9.6% requires a larger improvement.</p>
+                    <p><strong>Target:</strong> 9.6% GoodQualityRate</p>
+                    <p><strong>Required Improvement:</strong> +3.93 percentage points (69.28% relative increase)</p>
+                    
+                    <h4>Scenario Analysis Results:</h4>
+                    <ul>
+                        <li><strong>Scenario A - Cut Worst 5%:</strong> New quality 5.97% | Volume drop 5.0% | ❌ Not reaching target</li>
+                        <li><strong>Scenario A - Cut Worst 10%:</strong> New quality 6.30% | Volume drop 10.0% | ❌ Not reaching target</li>
+                        <li><strong>Scenario A - Cut Worst 15%:</strong> New quality 6.67% | Volume drop 15.0% | ❌ Not reaching target</li>
+                        <li><strong>Scenario A - Cut Worst 20%:</strong> New quality 7.09% | Volume drop 20.0% | ❌ Not reaching target</li>
+                    </ul>
+                    
+                    <p><strong>Note:</strong> Scenario A is an oracle upper bound (theoretical limit) - it assumes we can perfectly identify and remove the worst leads. In practice, we can only use rules (score thresholds, publisher zones, traffic sources) to approximate this.</p>
+                    
+                    <p><strong>Conclusion:</strong> <strong>We cannot reach the 9.6% target</strong> with the current dataset and available strategies.</p>
+                    
+                    <p><strong>Maximum Achievable Rate:</strong> ~6.67%～7.1% (depending on strategy and volume drop)</p>
+                    
+                    <h4>Business Value Analysis:</h4>
+                    <p><strong>Even without reaching 9.6%, structural optimization is still worthwhile:</strong></p>
+                    <ul>
+                        <li><strong>Example (Cut 15% scenario):</strong>
+                            <ul>
+                                <li>Baseline: 2,786 leads × 5.67% = 158 effective leads, Total cost = $83,580, Effective CPL = $529</li>
+                                <li>Optimized: 2,368 leads × 6.67% = 158 effective leads, Total cost = $71,040, Effective CPL = $450</li>
+                                <li><strong>Result:</strong> Effective lead count remains the same, but cost efficiency improves by 15% ($529 → $450), saving $12,540 total cost</li>
+                            </ul>
+                        </li>
+                        <li><strong>Business Value:</strong> Even without the CPL increase ($30 → $33), structural optimization significantly improves cost efficiency and is worth implementing</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
